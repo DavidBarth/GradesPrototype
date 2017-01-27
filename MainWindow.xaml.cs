@@ -34,7 +34,9 @@ namespace GradesPrototype
         // TODO: Exercise 1: Task 3a: Display the logon view and and hide the list of students and single student view
         public void GotoLogon()
         {
-
+            logonPage.Visibility = Visibility.Visible;
+            studentProfile.Visibility = Visibility.Collapsed;
+            studentsPage.Visibility = Visibility.Collapsed;
         }
 
         // TODO: Exercise 1: Task 4c: Display the list of students
@@ -54,6 +56,12 @@ namespace GradesPrototype
 
         // TODO: Exercise 1: Task 3b: Handle successful logon
         // Update the display and show the data for the logged on user
+        private void Logon_Success(object sender, EventArgs e)
+        {
+            logonPage.Visibility = Visibility.Collapsed;
+            studentProfile.Visibility = Visibility.Visible;
+            Refresh();
+        }
 
         // Handle logoff
         private void Logoff_Click(object sender, RoutedEventArgs e)
