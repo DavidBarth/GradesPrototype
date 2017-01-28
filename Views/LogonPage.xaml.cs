@@ -45,8 +45,10 @@ namespace GradesPrototype.Views
             {
                 SessionContext.CurrentStudent = "a current student name";
             }
+            //check wether the event is null
             if (logonSuccess != null)
             {
+                //raise the event
                 logonSuccess(this, null);
             }
         }

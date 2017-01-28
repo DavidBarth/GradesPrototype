@@ -41,14 +41,19 @@ namespace GradesPrototype
 
         // TODO: Exercise 1: Task 4c: Display the list of students
         private void GotoStudentsPage()
-        {            
-
+        {
+            studentProfile.Visibility = Visibility.Collapsed;
+            studentsPage.Visibility = Visibility.Visible;
+            studentsPage.Refresh();
         }
 
         // TODO: Exercise 1: Task 4b: Display the details for a single student
         public void GotoStudentProfile()
         {
-
+            studentsPage.Visibility = Visibility.Collapsed;
+            studentProfile.Visibility = Visibility.Visible;
+            studentProfile.Refresh();
+            
         }
         #endregion
 
@@ -83,16 +88,28 @@ namespace GradesPrototype
         // Set the global context to the name of the student and call the GotoStudentProfile method to display the details of the student
         private void studentsPage_StudentSelected(object sender, StudentEventArgs e)
         {
-
+            SessionContext.CurrentStudent = e.Child;
+            GotoStudentProfile();
         }
         #endregion
 
         #region Display Logic
 
-        // TODO: Exercise 1: Task 4a: Update the display for the logged on user (student or teacher)
+        // determine the type of user, display welcome <username> in txtName box
         private void Refresh()
         {
- 
+            switch (SessionContext.UserRole)
+            {
+                case Role.Student:
+                    txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
+                    GotoStudentProfile();
+                    break;
+
+                case Role.Teacher:
+                    txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
+                    GotoStudentsPage();
+                    break;
+            }
         }
         #endregion
     }
